@@ -404,3 +404,4 @@ review.forEach((el, i) => {
 
   }
 })
+print()
