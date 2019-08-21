@@ -342,7 +342,7 @@ let weeks = {
       ["compleō, complēre, comlēvī, complētus, tr.; w. abl.", "fill (with)"],
       ["cēdō, cēdere, cessī, cessūrus, 3, intr.", "give way, yield"],
       ["atque (ac), conj.", "and"],
-      ["Populīque = et Populī"],
+      ["Populīque", "et Populī"],
       ["Sanctūs Michael", "St. Michael the Archangel"],
       ["vinculum, ī", "chain"],
       ["intrā", "enter!"],
@@ -369,7 +369,7 @@ let weeks = {
 }
 let test = prompt("Would you like to test? y/n") === "y"
 let way = test ? (prompt("Would you like to answer in English? y/n") === "n") : false
-let week = Number(prompt(`What week would you like to ${test ? "test" : "review"}?`)) - 1
+let week = Number(prompt(`What week would you like to ${test ? "test" : "review"}? (Or put 'all' to test all of them)`)) - 1
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -377,7 +377,12 @@ function shuffle(a) {
   }
   return a;
 }
-let review = weeks.A[week]
+let review
+if (week === "all") {
+  review = weeks.A.flat()
+} else {
+  review = weeks.A[week]
+}
 review.forEach(el => {
   for (let x = 0; x < 0; x++) {
     review.push(el)
@@ -385,22 +390,25 @@ review.forEach(el => {
 })
 review = shuffle(review)
 review.forEach((el, i) => {
+  if (el === undefined || el === "" || el.length === 0) {
+    return el
+  }
+  let itemBox = document.createElement("div")
+  itemBox.id = "item"
   let item = document.createElement("h3")
   item.innerText = el[way ? 1 : 0] + ": " + (test ? "?" : el[way ? 0 : 1])
   item.id = test ? "textNoFont" : "text"
   let writeBox = document.createElement("div")
   writeBox.id = "writeBox"
+  itemBox.appendChild(item)
+  itemBox.appendChild(writeBox)
   if (i % 2 === 0) {
-    document.getElementById("side1").appendChild(item)
+    document.getElementById("side1").appendChild(itemBox)
     // document.getElementById("side1").appendChild(document.createElement("br"))
-    document.getElementById("side1").appendChild(writeBox)
 
   } else {
-    document.getElementById("side2").appendChild(item)
+    document.getElementById("side2").appendChild(itemBox)
     // document.getElementById("side2").appendChild(document.createElement("br"))
-
-    document.getElementById("side2").appendChild(writeBox)
-
 
   }
 })
