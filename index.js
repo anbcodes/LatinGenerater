@@ -363,12 +363,24 @@ let weeks = {
   ],
   "B": [
     [
-
+      ["terra, ae", "earth, land"],
+      ["porta, ae", "gate"],
+      ["Marīa, ae", "Mary"],
+      ["nauta, ae", "sailor"],
+      ["victōria, ae", "victory"],
+      ["silva, ae", "forest"],
+      ["glōria, ae", "fame, glory"],
+      ["ōrat", "he, she, it prays"],
+      ["ōrant", "they pray"],
+      ["videt", "he, she, it sees"],
+      ["vident", "they see"],
+      ["nōn, adverb", "not"],
     ]
   ]
 }
 let test = prompt("Would you like to test? y/n") === "y"
 let way = test ? (prompt("Would you like to answer in English? y/n") === "n") : false
+let challenge = prompt(`What challenge would you like to ${test ? "test" : "review"}?`).toUpperCase()
 let week = Number(prompt(`What week would you like to ${test ? "test" : "review"}? (Or put 'all' to test all of them)`)) - 1
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -379,9 +391,9 @@ function shuffle(a) {
 }
 let review
 if (week === "all") {
-  review = weeks.A.flat()
+  review = weeks[challenge].flat()
 } else {
-  review = weeks.A[week]
+  review = weeks[challenge][week]
 }
 review.forEach(el => {
   for (let x = 0; x < 0; x++) {
